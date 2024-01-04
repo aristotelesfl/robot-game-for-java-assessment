@@ -1,7 +1,5 @@
 package br.com.mrRobot.models;
 
-import java.util.Locale;
-
 public abstract class Robot {
     private String color;
     private int[] position = new int[2];
@@ -27,16 +25,16 @@ public abstract class Robot {
     public void move(String comand){
         switch (comand.toLowerCase()){
             case "up":
-                this.position[0]++;
-                break;
-            case "down":
                 this.position[0]--;
                 break;
+            case "down":
+                this.position[0]++;
+                break;
             case "left":
-                this.position[1]++;
+                this.position[1]--;
                 break;
             case "right":
-                this.position[1]--;
+                this.position[1]++ ;
                 break;
             default:
                 System.out.println("Ação inválida!");

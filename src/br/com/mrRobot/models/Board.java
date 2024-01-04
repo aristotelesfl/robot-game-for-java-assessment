@@ -3,24 +3,18 @@ import java.util.Arrays;
 import br.com.mrRobot.functions.ColorMap;
 
 public class Board{
-    public void generateBoard(Player player, int[] food){
-        for(int i=0; i<6; i++){
-            //            manda pra outro canto
-//            if (Arrays.equals(player.getPosition(), food)) {
-//                player.gameEnd(true);
-//                System.out.println("cabou");
-//                break;
-//            }
-            for(int j=0; j<6; j++){
+    public void generateBoard(Player player, int[] positionFood){
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
                 int[] position = {i, j};
                 if(Arrays.equals(player.getPosition(), position)) {
-                    ColorMap.colorMap(player.getColor(), "(  R  )");
-                } else if (Arrays.equals(food, position)) {
-                    ColorMap.colorMap("ciano", "(  A  )" );
+                    System.out.print(ColorMap.colorMap(player.getColor(), "(  R  )"));
+                } else if (Arrays.equals(positionFood, position)) {
+                    System.out.print(ColorMap.colorMap("amarelo", "(  A  )" ));
                 } else {
                     System.out.printf("(%d , %d)", i, j);
                 }
-                if(j<5){
+                if(j<4){
                     System.out.print(" | ");
                 }
             }

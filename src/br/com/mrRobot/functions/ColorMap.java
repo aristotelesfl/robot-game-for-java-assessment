@@ -20,11 +20,11 @@ public class ColorMap {
         CORES.put("ciano", CIANO);
     }
 
-    public static void colorMap(String cor, String texto) {
+    public static String colorMap(String cor, String texto) {
         if (CORES.containsKey(cor)) {
-            System.out.print(CORES.get(cor) + texto + RESET);
+            return (CORES.get(cor) + texto + RESET);
         } else {
-            System.out.print("Cor não encontrada: " + cor);
+            return null;
         }
     }
 }
