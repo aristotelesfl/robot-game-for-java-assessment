@@ -1,5 +1,4 @@
 package br.com.mrRobot.gameMode;
-import br.com.mrRobot.functions.FoundFood;
 import br.com.mrRobot.functions.GameInit;
 import br.com.mrRobot.models.Board;
 import br.com.mrRobot.models.Player;
@@ -13,7 +12,7 @@ public class Normal implements PlayGame {
     public void playGame() {
         play.initGame();
         Player normalPlayer = new Player(play.getColor());
-        while (!normalPlayer.endGame(new FoundFood().foundFood(normalPlayer, play.getPositionFood()))){
+        while (!normalPlayer.endGame(play.getPositionFood())){
             board.generateBoard(normalPlayer, play.getPositionFood());
             System.out.print("Mova seu robô: ");
             normalPlayer.move(new Scanner(System.in).nextInt());

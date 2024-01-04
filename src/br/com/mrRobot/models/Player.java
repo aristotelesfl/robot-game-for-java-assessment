@@ -1,5 +1,7 @@
 package br.com.mrRobot.models;
 
+import java.util.Arrays;
+
 public class Player extends Robot {
     private int rounds;
     private boolean wonGame;
@@ -28,8 +30,8 @@ public class Player extends Robot {
             default -> System.out.println("Ação inválida!");
         }
     }
-    public boolean endGame(boolean foundFood){
-        if (foundFood){
+    public boolean endGame(int[] positionFood){
+        if (Arrays.equals(this.getPosition(), positionFood)){
             wonGame = true;
         }
         return wonGame;

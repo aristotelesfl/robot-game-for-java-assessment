@@ -1,5 +1,4 @@
 package br.com.mrRobot.gameMode;
-import br.com.mrRobot.functions.FoundFood;
 import br.com.mrRobot.functions.GameInit;
 import br.com.mrRobot.models.Board;
 import br.com.mrRobot.models.Player;
@@ -12,7 +11,7 @@ public class Aleatory implements PlayGame {
     public void playGame() {
         play.initGame();
         Player randomPlayer = new Player(play.getColor());
-        while (!randomPlayer.endGame(new FoundFood().foundFood(randomPlayer, play.getPositionFood()))){
+        while (!randomPlayer.endGame(play.getPositionFood())){
             board.generateBoard(randomPlayer, play.getPositionFood());
             System.out.println("Movendo robô aleatoriamente...");
             randomPlayer.setPosition(play.generatePosition());
