@@ -1,13 +1,11 @@
 package br.com.mrRobot.models;
 
 public abstract class Robot {
-    private String color;
+    private final String color;
     private int[] position = new int[2];
 
     public Robot(String color){
         this.color = color;
-        this.position[0] = 0;
-        this.position[1] = 0;
     }
 
     public String getColor() {
@@ -23,21 +21,12 @@ public abstract class Robot {
     }
 
     public void move(String comand){
-        switch (comand.toLowerCase()){
-            case "up":
-                this.position[0]--;
-                break;
-            case "down":
-                this.position[0]++;
-                break;
-            case "left":
-                this.position[1]--;
-                break;
-            case "right":
-                this.position[1]++ ;
-                break;
-            default:
-                System.out.println("Ação inválida!");
+        switch (comand.toLowerCase()) {
+            case "up" -> this.position[0]--;
+            case "down" -> this.position[0]++;
+            case "left" -> this.position[1]--;
+            case "right" -> this.position[1]++;
+            default -> System.out.println("Ação inválida!");
         }
     }
 

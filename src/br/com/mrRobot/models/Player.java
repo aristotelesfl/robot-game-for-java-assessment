@@ -20,25 +20,16 @@ public class Player extends Robot {
     @Override
     public void move(int comand){
         this.coutRounds();
-        switch (comand){
-            case 1:
-                this.move("up");
-                break;
-            case 2:
-                this.move("down");
-                break;
-            case 3:
-                this.move("left");
-                break;
-            case 4:
-                this.move("right");
-                break;
-            default:
-                System.out.println("Ação inválida!");
+        switch (comand) {
+            case 1 -> this.move("up");
+            case 2 -> this.move("down");
+            case 3 -> this.move("left");
+            case 4 -> this.move("right");
+            default -> System.out.println("Ação inválida!");
         }
     }
-    public boolean gameEnd(boolean foundFood){
-        if (foundFood == true){
+    public boolean endGame(boolean foundFood){
+        if (foundFood){
             wonGame = true;
         }
         return wonGame;

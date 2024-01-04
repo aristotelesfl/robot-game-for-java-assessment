@@ -1,13 +1,13 @@
-package br.com.mrRobot.gameMode;
+package br.com.mrRobot.functions;
 import java.util.Random;
 import java.util.Scanner;
 
 import static br.com.mrRobot.functions.ColorMap.colorMap;
 
 public class GameInit {
-    private Scanner input = new Scanner(System.in);
-    private String color = new String();
-    private int[] positionFood = new int[2];
+    private final Scanner input = new Scanner(System.in);
+    private String color = "";
+    private final int[] positionFood = new int[2];
     public void initGame() {
         System.out.println("Iniciando Game");
         System.out.printf("%s - %s - %s - %s - %s\n",
