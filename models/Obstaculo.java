@@ -7,7 +7,7 @@ public abstract class Obstaculo {
         this.posicao = posicao;
     }
     protected int id;
-    private int[] posicao = new int[2];
+    private final int[] posicao;
     public abstract <T> void bater(Robot player, T direction) throws MovimentoInvalidoException;
 
     public int[] getPosicao() {

@@ -9,6 +9,9 @@ public class Bomba extends Obstaculo{
     }
     @Override
     public <T> void bater(Robot player, T direction) {
-        if (Arrays.equals(player.position, this.getPosicao())) player.isDead = true;
+        if (Arrays.equals(player.position, this.getPosicao())) {
+            player.isDead = true;
+        }
+
     }
 }

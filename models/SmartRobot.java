@@ -3,11 +3,8 @@ package models;
 import exceptions.MovimentoInvalidoException;
 
 public class SmartRobot extends Robot{
-    public SmartRobot(String color) {
-        super(color);
-    }
 
-    public SmartRobot(){};
+    public SmartRobot(){}
     @Override
     public void mover(int direction) throws MovimentoInvalidoException {
         switch (direction) {

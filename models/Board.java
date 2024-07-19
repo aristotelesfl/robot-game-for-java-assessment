@@ -17,7 +17,11 @@ public class Board {
 
     private void printRobot(Robot player, int[] position) {
         if (Arrays.equals(player.getPosition(), position)) {
-            System.out.print(ColorMap.colorMap(player.getColor(), "(  R  )"));
+            try {
+                System.out.print(ColorMap.colorMap(player.getColor(), "(  R  )"));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
         }
     }
 
@@ -27,11 +31,9 @@ public class Board {
                 int[] position = {i, j};
                 boolean isOccupied = false;
 
-                if (listOfPlayers instanceof ArrayList<?>) {
-                    ArrayList<?> players = (ArrayList<?>) listOfPlayers;
+                if (listOfPlayers instanceof ArrayList<?> players) {
                     for (Object obj : players) {
-                        if (obj instanceof Robot) {
-                            Robot player = (Robot) obj;
+                        if (obj instanceof Robot player) {
                             if (Arrays.equals(player.getPosition(), position) && !player.isDead) {
                                 printRobot(player, position);
                                 isOccupied = true;
@@ -41,9 +43,8 @@ public class Board {
                             throw new IllegalArgumentException("O ArrayList deve conter apenas objetos do tipo Robot");
                         }
                     }
-                } else if (listOfPlayers instanceof Robot) {
-                    Robot player = (Robot) listOfPlayers;
-                    if (Arrays.equals(player.getPosition(), position) ) {
+                } else if (listOfPlayers instanceof Robot player) {
+                    if (Arrays.equals(player.getPosition(), position)) {
                         printRobot(player, position);
                         isOccupied = true;
                     }

@@ -2,6 +2,8 @@ package models;
 
 import exceptions.MovimentoInvalidoException;
 
+import java.util.Arrays;
+
 public class Pedra extends Obstaculo{
     public Pedra(int[] posicao){
         super(posicao);
@@ -9,24 +11,14 @@ public class Pedra extends Obstaculo{
     }
     @Override
     public <T> void bater(Robot player, T direction) throws MovimentoInvalidoException {
-        String d = (direction instanceof Integer) ? Integer.toString((Integer) direction) : (String) direction;
-        switch (d) {
-            case "1":
-            case "up":
-                player.mover("down");
-                break;
-            case "2":
-            case "down":
-                player.mover("up");
-                break;
-            case "3":
-            case "rigth":
-                player.mover("left");
-                break;
-            case "4":
-            case "left":
-                player.mover("rigth");
-                break;
+        if (Arrays.equals(player.getPosition(), this.getPosicao())){
+            String d = (direction instanceof Integer) ? Integer.toString((Integer) direction) : (String) direction;
+            switch (d) {
+                case "1", "up" -> player.mover("down");
+                case "2", "down" -> player.mover("up");
+                case "3", "left" -> player.mover("right");
+                case "4", "right" -> player.mover("left");
+            }
         }
     }
 }

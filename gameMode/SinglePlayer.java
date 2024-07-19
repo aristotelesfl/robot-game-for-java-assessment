@@ -1,5 +1,6 @@
 package gameMode;
 import exceptions.MovimentoInvalidoException;
+import exceptions.PosicaoInvalidaException;
 import models.Board;
 import models.Food;
 import models.Obstaculo;
@@ -15,11 +16,18 @@ public class SinglePlayer implements GameMode {
     private final Board board = new Board();
     private final NewGame newGame = new NewGame();
 
-    public void playGame(){
+    public void playGame() {
         newGame.play(food);
+        ArrayList<Obstaculo> obstaculos = new ArrayList<>();
         Robot player = new Robot(newGame.setColor(1));
-        ArrayList<Obstaculo> obstaculos = newGame.criarObstaculos();
-        while (!player.winGame(food.getPosition())) {
+
+        try {
+            obstaculos = newGame.criarObstaculos();
+        } catch (PosicaoInvalidaException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+        while (!player.winGame(food.getPosition()) && !player.isDead) {
             try {
                 board.generateBoard(player, food.getPosition(), obstaculos);
                 System.out.print("""
@@ -28,6 +36,7 @@ public class SinglePlayer implements GameMode {
                 Object direction = (input.hasNextInt()) ? input.nextInt() : input.next();
                 if (direction instanceof String) player.mover((String) direction);
                 else player.mover((int) direction);
+
                 for (Obstaculo obstaculo : obstaculos) {
                     obstaculo.bater(player, direction);
                 }
@@ -36,6 +45,11 @@ public class SinglePlayer implements GameMode {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
-        System.out.println("Você venceu em " + rounds + " rodadas!");
+
+        if (player.isDead) {
+            System.out.println("Você morreu");
+        } else {
+            System.out.println("Você venceu em " + rounds + " rodadas!");
+        }
     }
 }

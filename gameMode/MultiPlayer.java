@@ -1,13 +1,13 @@
 package gameMode;
 
 import exceptions.MovimentoInvalidoException;
+import exceptions.PosicaoInvalidaException;
 import models.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MultiPlayer implements GameMode {
-    private boolean temObstaculo;
     private final Scanner input = new Scanner(System.in);
     private int rounds = 0;
     private final Food food = new Food();
@@ -15,24 +15,44 @@ public class MultiPlayer implements GameMode {
     private final NewGame newGame = new NewGame();
 
     @Override
-    public void playGame() throws MovimentoInvalidoException {
-        newGame.play(food);
-        ArrayList<Robot> players = new ArrayList<Robot>();
+    public void playGame() {
+        ArrayList<Robot> players = new ArrayList<>();
         selectGameMode(players);
+        int numPlayer = 0;
+        boolean isDead = false;
+        newGame.play(food);
         for (Robot player : players){
-            player.setColor(newGame.setColor(players.indexOf(player)+1));
+            while (true) {
+                try {
+                    player.setColor(newGame.setColor(players.indexOf(player)+1));
+                    break;
+                } catch (IllegalArgumentException e) {
+                    e.getMessage();
+                }
+            }
         }
-        ArrayList<Obstaculo> obstaculos = newGame.criarObstaculos();
-        while (!players.get(0).winGame(food.getPosition()) && !players.get(1).winGame(food.getPosition())){
+        ArrayList<Obstaculo> obstaculos = null;
+        try {
+            obstaculos = newGame.criarObstaculos();
+        } catch (PosicaoInvalidaException e){
+            e.getMessage();
+        }
+        while (!players.get(0).winGame(food.getPosition()) && !players.get(1).winGame(food.getPosition()) && (!players.get(0).isDead || !players.get(1).isDead)){
             try {
                 for (Robot player : players) {
-                    System.out.println("Movendo Player " + (players.indexOf(player)+1) + " aleatoriamente...");
-                    board.generateBoard(players, food.getPosition(), obstaculos);
-                    Thread.sleep(2000);
-                    int aleatory = player.aleatoryDirection();
-                    player.mover(aleatory);
-                    for (Obstaculo obstaculo : obstaculos) {
-                        obstaculo.bater(player, aleatory);
+                    if (!player.isDead) {
+                        System.out.println("Movendo Player " + (players.indexOf(player)+1) + " aleatoriamente...");
+                        board.generateBoard(players, food.getPosition(), obstaculos);
+                        Thread.sleep(2000);
+                        int aleatory = player.aleatoryDirection();
+                        player.mover(aleatory);
+                        for (Obstaculo obstaculo : obstaculos) {
+                            obstaculo.bater(player, aleatory);
+                        }
+                    } else if (!isDead) {
+                        numPlayer = (players.indexOf(player)+1);
+                        System.out.printf("O player %d morreu em %d rounds\n", numPlayer, rounds);
+                        isDead = true;
                     }
                 }
                 rounds++;
@@ -42,7 +62,8 @@ public class MultiPlayer implements GameMode {
                 System.err.println("Thread foi interrompida!");
             }
         }
-        System.out.println("O player " + ((players.get(0).winGame(food.getPosition())) ? 1 : 2) + " venceu em " + rounds + " rodadas!");
+        if (players.get(0).isDead && players.get(1).isDead) System.out.printf("O player %d morreu em %d rounds\nFim de Jogo!", ((numPlayer!=1) ? 1 : 2), rounds);
+        else System.out.println("O player " + ((players.get(0).winGame(food.getPosition())) ? 1 : 2) + " venceu em " + rounds + " rodadas!");
     }
 
     public void selectGameMode(ArrayList<Robot> listOfPlayers) {
