@@ -1,8 +1,12 @@
-package gameMode;
+package br.com.robotGame.modes;
 
-import exceptions.MovimentoInvalidoException;
-import exceptions.PosicaoInvalidaException;
-import models.*;
+import br.com.robotGame.exceptions.MovimentoInvalidoException;
+import br.com.robotGame.exceptions.PosicaoInvalidaException;
+import br.com.robotGame.models.entities.Robot;
+import br.com.robotGame.models.entities.SmartRobot;
+import br.com.robotGame.models.environment.Board;
+import br.com.robotGame.models.environment.Food;
+import br.com.robotGame.models.environment.Obstaculo;
 
 import java.util.ArrayList;
 import java.util.Scanner;

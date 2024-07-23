@@ -1,15 +1,15 @@
-package gameMode;
-import exceptions.PosicaoInvalidaException;
-import models.Bomba;
-import models.Food;
-import models.Obstaculo;
-import models.Pedra;
+package br.com.robotGame.modes;
+import br.com.robotGame.exceptions.PosicaoInvalidaException;
+import br.com.robotGame.models.environment.Bomba;
+import br.com.robotGame.models.environment.Food;
+import br.com.robotGame.models.environment.Obstaculo;
+import br.com.robotGame.models.environment.Pedra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static models.ColorMap.colorMap;
+import static br.com.robotGame.utils.ColorMap.colorMap;
 
 public class NewGame {
     private final Scanner input = new Scanner(System.in);

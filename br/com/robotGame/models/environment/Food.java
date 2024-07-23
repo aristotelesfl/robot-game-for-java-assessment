@@ -1,4 +1,4 @@
-package models;
+package br.com.robotGame.models.environment;
 
 public class Food {
     private int[] position = new int[2];

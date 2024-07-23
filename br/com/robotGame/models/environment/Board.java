@@ -1,4 +1,7 @@
-package models;
+package br.com.robotGame.models.environment;
+
+import br.com.robotGame.models.entities.Robot;
+import br.com.robotGame.utils.ColorMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;

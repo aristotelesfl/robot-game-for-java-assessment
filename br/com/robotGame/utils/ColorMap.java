@@ -1,4 +1,4 @@
-package models;
+package br.com.robotGame.utils;
 
 public class ColorMap {
     public static final String RESET = "\u001B[0m";
@@ -15,7 +15,7 @@ public class ColorMap {
             case "amarelo" -> YELLOW;
             case "azul" -> BLUE;
             case "ciano" -> CIANO;
-            default -> throw new IllegalArgumentException("Cor Inválida!");
+            default -> throw new IllegalArgumentException("Erro: Cor Inválida! Tente novamente.");
         };
 
         return colorCode + texto + RESET;

@@ -1,6 +1,6 @@
-package models;
+package br.com.robotGame.models.entities;
 
-import exceptions.MovimentoInvalidoException;
+import br.com.robotGame.exceptions.MovimentoInvalidoException;
 
 import java.util.Arrays;
 import java.util.Random;

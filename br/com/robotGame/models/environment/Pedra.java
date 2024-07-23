@@ -1,10 +1,12 @@
-package models;
+package br.com.robotGame.models.environment;
 
-import exceptions.MovimentoInvalidoException;
+import br.com.robotGame.exceptions.MovimentoInvalidoException;
+import br.com.robotGame.models.entities.Robot;
+import br.com.robotGame.models.environment.Obstaculo;
 
 import java.util.Arrays;
 
-public class Pedra extends Obstaculo{
+public class Pedra extends Obstaculo {
     public Pedra(int[] posicao){
         super(posicao);
         this.id = 1;

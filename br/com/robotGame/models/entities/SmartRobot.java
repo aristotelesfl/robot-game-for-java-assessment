@@ -1,8 +1,8 @@
-package models;
+package br.com.robotGame.models.entities;
 
-import exceptions.MovimentoInvalidoException;
+import br.com.robotGame.exceptions.MovimentoInvalidoException;
 
-public class SmartRobot extends Robot{
+public class SmartRobot extends Robot {
 
     public SmartRobot(){}
     @Override

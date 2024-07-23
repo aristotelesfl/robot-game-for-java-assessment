@@ -1,8 +1,8 @@
-import exceptions.MovimentoInvalidoException;
-import exceptions.PosicaoInvalidaException;
-import gameMode.GameMode;
-import gameMode.MultiPlayer;
-import gameMode.SinglePlayer;
+import br.com.robotGame.exceptions.MovimentoInvalidoException;
+import br.com.robotGame.exceptions.PosicaoInvalidaException;
+import br.com.robotGame.modes.GameMode;
+import br.com.robotGame.modes.MultiPlayer;
+import br.com.robotGame.modes.SinglePlayer;
 
 import java.util.Scanner;
 
