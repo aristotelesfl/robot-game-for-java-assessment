@@ -1,3 +1,5 @@
+package br.com.robotGame;
+
 import br.com.robotGame.exceptions.MovimentoInvalidoException;
 import br.com.robotGame.exceptions.PosicaoInvalidaException;
 import br.com.robotGame.modes.GameMode;
