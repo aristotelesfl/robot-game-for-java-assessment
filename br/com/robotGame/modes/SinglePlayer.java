@@ -31,7 +31,7 @@ public class SinglePlayer implements GameMode {
             try {
                 board.generateBoard(player, food.getPosition(), obstaculos);
                 System.out.print("""
-                        1 representa “up”, 2 representa “down”, 3 representa “right” e 4 representa “left”
+                        1 representa “up”, 2 representa “down”, 3 representa “left” e 4 representa “right”
                         Selecione uma direção para se mover:\s""");
                 Object direction = (input.hasNextInt()) ? input.nextInt() : input.next();
                 if (direction instanceof String) player.mover((String) direction);

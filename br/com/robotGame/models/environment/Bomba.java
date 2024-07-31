@@ -14,6 +14,5 @@ public class Bomba extends Obstaculo {
         if (Arrays.equals(player.getPosition(), this.getPosicao())) {
             player.isDead = true;
         }
-
     }
 }

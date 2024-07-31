@@ -9,6 +9,7 @@ import br.com.robotGame.models.environment.Food;
 import br.com.robotGame.models.environment.Obstaculo;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MultiPlayer implements GameMode {
@@ -50,9 +51,15 @@ public class MultiPlayer implements GameMode {
                         Thread.sleep(2000);
                         int aleatory = player.aleatoryDirection();
                         player.mover(aleatory);
+                        ArrayList<Obstaculo> obstaculosARemover = new ArrayList<>();
                         for (Obstaculo obstaculo : obstaculos) {
                             obstaculo.bater(player, aleatory);
+                            if (player.isDead) {
+                                obstaculosARemover.add(obstaculo);
+                            }
                         }
+
+                        obstaculos.removeAll(obstaculosARemover);
                     } else if (!isDead) {
                         numPlayer = (players.indexOf(player)+1);
                         System.out.printf("O player %d morreu em %d rounds\n", numPlayer, rounds);
@@ -71,27 +78,41 @@ public class MultiPlayer implements GameMode {
     }
 
     public void selectGameMode(ArrayList<Robot> listOfPlayers) {
-        System.out.print("""
+        boolean validOptionSelected = false;
+
+        while (!validOptionSelected) {
+            System.out.print("""
                 --- Modos de jogo ---
                 1 - Normal vs Normal
                 2 - Normal vs Inteligente
                 3 - Inteligente vs Inteligente
                 Selecione uma opção:\s""");
-        int option = input.nextInt();
-        switch (option) {
-            case 1 -> {
-                listOfPlayers.add(new Robot());
-                listOfPlayers.add(new Robot());
+
+            try {
+                int option = input.nextInt();
+                switch (option) {
+                    case 1 -> {
+                        listOfPlayers.add(new Robot());
+                        listOfPlayers.add(new Robot());
+                        validOptionSelected = true;
+                    }
+                    case 2 -> {
+                        listOfPlayers.add(new Robot());
+                        listOfPlayers.add(new SmartRobot());
+                        validOptionSelected = true;
+                    }
+                    case 3 -> {
+                        listOfPlayers.add(new SmartRobot());
+                        listOfPlayers.add(new SmartRobot());
+                        validOptionSelected = true;
+                    }
+                    default -> System.out.println("Entrada Inválida!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("O valor digitado deve ser um inteiro!");
+                input.next();
             }
-            case 2 -> {
-                listOfPlayers.add(new Robot());
-                listOfPlayers.add(new SmartRobot());
-            }
-            case 3 -> {
-                listOfPlayers.add(new SmartRobot());
-                listOfPlayers.add(new SmartRobot());
-            }
-            default -> System.out.println("Entrada Inválida!");
+
         }
     }
 }
